@@ -17,10 +17,22 @@ namespace FoodMenuApp.Controllers
             this.context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchString)
         {
-           var model = await context.Dishes.ToListAsync();
-            return View(model);
+            // Query Syntax
+            // var dishes = from d in context.Dishes
+            // select d;
+
+            var dishes = context.Dishes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                dishes = dishes.Where(x=> x.Name.Contains(searchString));
+
+                return View(await dishes.ToListAsync());
+            }
+
+            return View(await dishes.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
