@@ -1,0 +1,30 @@
+﻿@model List<FoodMenuApp.Models.Dish>
+
+@{
+    ViewData["Title"] = "Menu";
+}
+
+@if (Model.Any())
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-6 col-md-6 mb-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">@item.Name</h3>
+                    </div>
+                    <div class="card-body">
+                        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                        <p class="card-text">@item.Price.ToString("N2") Rupees</p>
+                        <a asp-controller="Menu" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h2>No data found!</h2>
+}

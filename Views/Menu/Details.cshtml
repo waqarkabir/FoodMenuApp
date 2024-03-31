@@ -1,0 +1,29 @@
+﻿@model FoodMenuApp.Models.Dish
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row justify-content-center">
+    <div class="card w-50">
+        <h2 class="card-title">@Model.Name</h2>
+        <div class="card-body">
+            <img class="card-img-top" src="@Model.ImageUrl" alt="Card image cap">
+            <p class="card-text">
+                <b>Price:</b> @Model.Price.ToString("N2") Rupees
+            </p>
+            <div>
+                <h5>Ingredients:</h5>
+                <ul class="">
+                    @foreach (var item in Model.DishIngredients)
+                    {
+                        <li>@item.Ingredient.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="index" class="btn btn-sm btn-primary">Back to Main Menu</a>
+</div>
